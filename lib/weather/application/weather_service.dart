@@ -9,6 +9,7 @@ import 'package:weather_bloc/weather/domain/weather.dart';
 
 // * [service] katmanı opsiyoneldir.
 // * iş mantığı içermeyen durumlarda, kullanılmasına gerek yoktur
+// * direkt olarak [repository] ile etkileşime geçer
 
 class WeatherService {
   final IWeatherRepository weatherRepository;

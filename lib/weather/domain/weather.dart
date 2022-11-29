@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 // * servisten dönen response'ları modelleyeceğimiz yer [domain] klasörüdür
@@ -12,6 +13,16 @@ class Weather {
     required this.name,
     required this.degree,
   });
+
+  Weather copyWith({
+    String? name,
+    double? degree,
+  }) {
+    return Weather(
+      name: name ?? this.name,
+      degree: degree ?? this.degree,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -33,7 +44,7 @@ class Weather {
       Weather.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'City(name: $name, degree: $degree)';
+  String toString() => 'Weather(name: $name, degree: $degree)';
 
   @override
   bool operator ==(covariant Weather other) {

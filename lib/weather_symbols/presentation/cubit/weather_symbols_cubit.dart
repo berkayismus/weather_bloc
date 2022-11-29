@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weather_bloc/weather/presentation/cubit/weather_cubit.dart';
+import 'package:weather_bloc/weather/presentation/cubit/weather_freezed_state.dart';
 
 part 'weather_symbols_state.dart';
 
@@ -14,17 +15,19 @@ class WeatherSymbolsCubit extends Cubit<WeatherSymbolsState> {
   }
 
   final WeatherCubit weatherCubit;
-  late StreamSubscription<WeatherState> weatherStateSub;
+  late StreamSubscription<WeatherFreezedState> weatherStateSub;
 
-  void _listenWeatherState(WeatherState weatherState) {
-    final degree = weatherState.selectedWeather?.degree;
-    final degreeIsNotNull = degree != null;
-    if (degreeIsNotNull && degree <= -5) {
-      emit(state.copyWith(symbol: Symbols.cold));
-    } else if (degreeIsNotNull && degree <= -2) {
-      emit(state.copyWith(symbol: Symbols.cloudy));
-    } else {
-      emit(state.copyWith(symbol: Symbols.sunny));
+  void _listenWeatherState(WeatherFreezedState weatherState) {
+    if (weatherState is WeatherSelected) {
+      final degree = weatherState.selected?.degree;
+      final degreeIsNotNull = degree != null;
+      if (degreeIsNotNull && degree <= -5) {
+        emit(state.copyWith(symbol: Symbols.cold));
+      } else if (degreeIsNotNull && degree <= -2) {
+        emit(state.copyWith(symbol: Symbols.cloudy));
+      } else {
+        emit(state.copyWith(symbol: Symbols.sunny));
+      }
     }
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_bloc/background_color/presentation/cubit/background_color_cubit.dart';
 import 'package:weather_bloc/weather/data/repositories/weather_repository.dart';
 import 'package:weather_bloc/weather/presentation/cubit/weather_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_bloc/weather/presentation/widgets/weather_list.dart';
+import 'package:weather_bloc/weather_symbols/presentation/cubit/weather_symbols_cubit.dart';
+import 'package:weather_bloc/weather_symbols/presentation/widgets/weather_symbol.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -23,12 +25,12 @@ class _Blocs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<WeatherCubit>(
           create: (context) =>
               WeatherCubit(context.read<IWeatherRepository>())..getWeathers(),
         ),
-        BlocProvider(
-          create: (context) => BackgroundColorCubit(
+        BlocProvider<WeatherSymbolsCubit>(
+          create: (context) => WeatherSymbolsCubit(
             weatherCubit: context.read<WeatherCubit>(),
           ),
         ),
@@ -44,46 +46,15 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor:
-          context.watch<BackgroundColorCubit>().state.backgroundColor,
-      body: const _WeatherList(),
-    );
-  }
-}
-
-class _WeatherList extends StatelessWidget {
-  const _WeatherList();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<WeatherCubit, WeatherState>(
-      builder: (context, state) {
-        if (state.status == Status.initial) {
-          return const Text('initial state');
-        } else if (state.status == Status.loading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state.status == Status.loaded) {
-          return ListView.builder(
-            itemCount: state.weathers.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Text(state.weathers[index].degree.toString()),
-                title: Text(state.weathers[index].name),
-                trailing: state.weathers[index] == state.selectedWeather
-                    ? const Icon(Icons.check)
-                    : const SizedBox.shrink(),
-                onTap: () {
-                  context.read<WeatherCubit>().onTap(state.weathers[index]);
-                },
-              );
-            },
-          );
-        }
-        return const Text('failure state');
-      },
+      appBar: AppBar(
+        title: const Text('Reactive Weather Example'),
+      ),
+      body: Column(
+        children: const [
+          WeatherSymbol(),
+          Expanded(child: WeatherList()),
+        ],
+      ),
     );
   }
 }

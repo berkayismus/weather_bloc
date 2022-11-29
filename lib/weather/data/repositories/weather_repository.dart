@@ -6,9 +6,9 @@ abstract class IWeatherRepository {
 
 class WeatherRepository implements IWeatherRepository {
   final _weathers = [
-    Weather(name: 'Silivri', degree: 10.0),
-    Weather(name: 'Londra', degree: 5.0),
-    Weather(name: 'Agri', degree: -5.0),
+    Weather(name: 'Istanbul', degree: 10.0),
+    Weather(name: 'Agri', degree: -2.0),
+    Weather(name: 'Silivri', degree: -5.0),
   ];
 
   @override

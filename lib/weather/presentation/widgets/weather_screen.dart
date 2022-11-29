@@ -12,7 +12,7 @@ class WeatherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider<IWeatherRepository>(
-      create: (_) => WeatherRepository(),
+      create: (_) => LocalWeatherRepository(),
       child: const _Blocs(),
     );
   }

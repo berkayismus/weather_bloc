@@ -4,7 +4,7 @@ abstract class IWeatherRepository {
   Future<List<Weather>> getWeathers();
 }
 
-class WeatherRepository implements IWeatherRepository {
+class LocalWeatherRepository implements IWeatherRepository {
   final _weathers = [
     Weather(name: 'Istanbul', degree: 10.0),
     Weather(name: 'Agri', degree: -2.0),
@@ -15,5 +15,13 @@ class WeatherRepository implements IWeatherRepository {
   Future<List<Weather>> getWeathers() async {
     await Future.delayed(const Duration(seconds: 3));
     return _weathers;
+  }
+}
+
+class RemoteWeatherRepository implements IWeatherRepository {
+  @override
+  Future<List<Weather>> getWeathers() {
+    // TODO: implement getWeathers
+    throw UnimplementedError();
   }
 }

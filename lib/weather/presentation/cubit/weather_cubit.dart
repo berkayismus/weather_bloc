@@ -1,10 +1,12 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:weather_bloc/weather/data/repositories/weather_repository.dart';
 import 'package:weather_bloc/weather/domain/weather.dart';
 
 part 'weather_state.dart';
 
+@Injectable()
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit(this.weatherRepository) : super(WeatherState.initial());
 

@@ -6,6 +6,10 @@ import 'package:weather_bloc/weather/presentation/widgets/weather_list.dart';
 import 'package:weather_bloc/weather_symbols/presentation/cubit/weather_symbols_cubit.dart';
 import 'package:weather_bloc/weather_symbols/presentation/widgets/weather_symbol.dart';
 
+// * [view] controller ile etkileşime geçer
+// * sorumlu olduğu tek şey arayüzde eleman göstermektir
+// ! business logic hiç içermemeli veya minimum derecede içermelidir
+// * etkileşime geçtiği business logic, controller tarafında olmalıdır
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
 

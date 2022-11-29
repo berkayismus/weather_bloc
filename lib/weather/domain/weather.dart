@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+// * servisten dönen response'ları modelleyeceğimiz yer [domain] klasörüdür
+// * ilgili model(veya entity) fromJson ve toJson metodları içermelidir
+// * dart data class generator eklentisi ile ilgili metodlar oluşturulabilir
+// * model class'lar freezed veya equatable ile kolay bir şekilde oluşturulabilir
 class Weather {
   final String name;
   final double degree;

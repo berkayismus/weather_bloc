@@ -1,11 +1,40 @@
 part of 'weather_cubit.dart';
 
-@freezed
-class WeatherState with _$WeatherState {
-  const factory WeatherState.loading() = WeatherLoading;
-  const factory WeatherState.data(
-      {@Default([]) List<Weather> weathers, Weather? selected}) = WeatherLoaded;
-  const factory WeatherState.error({required String err}) = WeatherError;
-  /*  const factory WeatherState.selected({Weather? selected}) =
-      WeatherSelected; */
+enum Status { initial, loading, loaded, failure }
+
+class WeatherState extends Equatable {
+  final Status status;
+  final List<Weather> weathers;
+  final Weather? selected;
+
+  const WeatherState({
+    required this.weathers,
+    this.selected,
+    required this.status,
+  });
+
+  factory WeatherState.initial() {
+    return const WeatherState(
+      status: Status.initial,
+      weathers: [],
+    );
+  }
+
+  @override
+  List<Object?> get props => [status, weathers, selected];
+
+  @override
+  bool get stringify => true;
+
+  WeatherState copyWith({
+    Status? status,
+    List<Weather>? weathers,
+    Weather? selected,
+  }) {
+    return WeatherState(
+      status: status ?? this.status,
+      weathers: weathers ?? this.weathers,
+      selected: selected ?? this.selected,
+    );
+  }
 }

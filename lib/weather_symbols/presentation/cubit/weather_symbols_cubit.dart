@@ -17,16 +17,14 @@ class WeatherSymbolsCubit extends Cubit<WeatherSymbolsState> {
   late StreamSubscription<WeatherState> weatherStateSub;
 
   void _listenWeatherState(WeatherState weatherState) {
-    if (weatherState is WeatherLoaded) {
-      final degree = weatherState.selected?.degree;
-      final degreeIsNotNull = degree != null;
-      if (degreeIsNotNull && degree <= -5) {
-        emit(state.copyWith(symbol: Symbols.cold));
-      } else if (degreeIsNotNull && degree <= -2) {
-        emit(state.copyWith(symbol: Symbols.cloudy));
-      } else {
-        emit(state.copyWith(symbol: Symbols.sunny));
-      }
+    final degree = weatherState.selected?.degree;
+    final degreeIsNotNull = degree != null;
+    if (degreeIsNotNull && degree <= -5) {
+      emit(state.copyWith(symbol: Symbols.cold));
+    } else if (degreeIsNotNull && degree <= -2) {
+      emit(state.copyWith(symbol: Symbols.cloudy));
+    } else {
+      emit(state.copyWith(symbol: Symbols.sunny));
     }
   }
 

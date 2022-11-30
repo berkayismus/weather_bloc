@@ -9,35 +9,36 @@ class WeatherList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WeatherCubit, WeatherState>(
       builder: (context, state) {
-        return state.when(
-          loading: () => const Center(
+        if (state.status == Status.initial) {
+          return const Text('initial state');
+        } else if (state.status == Status.loading) {
+          return const Center(
             child: CircularProgressIndicator(),
-          ),
-          data: (data, selected) {
-            return ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Text(
-                    data[index].degree.toString(),
-                    style: const TextStyle(fontSize: 28),
-                  ),
-                  title: Text(
-                    data[index].name,
-                    style: const TextStyle(fontSize: 28),
-                  ),
-                  trailing: data[index] == selected
-                      ? const Icon(Icons.check)
-                      : const SizedBox.shrink(),
-                  onTap: () {
-                    context.read<WeatherCubit>().onTap(data[index]);
-                  },
-                );
-              },
-            );
-          },
-          error: (err) => Text(err),
-        );
+          );
+        } else if (state.status == Status.loaded) {
+          return ListView.builder(
+            itemCount: state.weathers.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                leading: Text(
+                  state.weathers[index].degree.toString(),
+                  style: const TextStyle(fontSize: 28),
+                ),
+                title: Text(
+                  state.weathers[index].name,
+                  style: const TextStyle(fontSize: 28),
+                ),
+                trailing: state.weathers[index] == state.selected
+                    ? const Icon(Icons.check)
+                    : const SizedBox.shrink(),
+                onTap: () {
+                  context.read<WeatherCubit>().onTap(state.weathers[index]);
+                },
+              );
+            },
+          );
+        }
+        return const Text('failure state');
       },
     );
   }

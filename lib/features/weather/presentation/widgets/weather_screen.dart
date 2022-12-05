@@ -51,7 +51,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reactive Weather Example'),
+        title: const Text('Weather App'),
       ),
       body: Column(
         children: const [

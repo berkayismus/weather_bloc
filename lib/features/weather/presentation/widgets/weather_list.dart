@@ -20,12 +20,12 @@ class WeatherList extends StatelessWidget {
             itemCount: state.weathers.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
-                leading: Text(
-                  state.weathers[index].degree.toString(),
-                  style: const TextStyle(fontSize: 28),
-                ),
                 title: Text(
                   state.weathers[index].name,
+                  style: const TextStyle(fontSize: 28),
+                ),
+                subtitle: Text(
+                  '${state.weathers[index].degree} °C',
                   style: const TextStyle(fontSize: 28),
                 ),
                 trailing: state.weathers[index] == state.selected

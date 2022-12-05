@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_bloc/weather/data/repositories/weather_repository.dart';
-import 'package:weather_bloc/weather/domain/weather.dart';
+import 'package:weather_bloc/features/weather/data/repositories/weather_repository.dart';
+import 'package:weather_bloc/features/weather/domain/weather.dart';
 
 part 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
-  WeatherCubit(this.weatherRepository) : super(WeatherState.initial());
-
   final IWeatherRepository weatherRepository;
+
+  WeatherCubit(this.weatherRepository) : super(WeatherState.initial());
 
   Future<void> getWeathers() async {
     try {

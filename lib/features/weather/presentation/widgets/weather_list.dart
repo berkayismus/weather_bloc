@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_bloc/weather/presentation/cubit/cubit/weather_cubit.dart';
+import 'package:weather_bloc/features/weather/presentation/cubit/cubit/weather_cubit.dart';
 
 class WeatherList extends StatelessWidget {
   const WeatherList({super.key});

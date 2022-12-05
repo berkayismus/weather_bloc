@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_bloc/weather/data/repositories/weather_repository.dart';
-import 'package:weather_bloc/weather/presentation/cubit/cubit/weather_cubit.dart';
+import 'package:weather_bloc/features/weather/data/repositories/weather_repository.dart';
+import 'package:weather_bloc/features/weather/presentation/cubit/cubit/weather_cubit.dart';
+import 'package:weather_bloc/features/weather/presentation/widgets/weather_list.dart';
+import 'package:weather_bloc/features/weather_symbols/presentation/cubit/weather_symbols_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_bloc/weather/presentation/widgets/weather_list.dart';
-import 'package:weather_bloc/weather_symbols/presentation/cubit/weather_symbols_cubit.dart';
-import 'package:weather_bloc/weather_symbols/presentation/widgets/weather_symbol.dart';
+import 'package:weather_bloc/features/weather_symbols/presentation/widgets/weather_symbol.dart';
 
 // * [view] controller ile etkileşime geçer
 // * sorumlu olduğu tek şey arayüzde eleman göstermektir

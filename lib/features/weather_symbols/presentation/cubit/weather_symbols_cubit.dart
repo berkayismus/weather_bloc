@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:weather_bloc/weather/presentation/cubit/cubit/weather_cubit.dart';
+import 'package:weather_bloc/features/weather/presentation/cubit/cubit/weather_cubit.dart';
 
 part 'weather_symbols_state.dart';
 
 class WeatherSymbolsCubit extends Cubit<WeatherSymbolsState> {
+  final WeatherCubit weatherCubit;
+  late StreamSubscription<WeatherState> weatherStateSub;
+
   WeatherSymbolsCubit({
     required this.weatherCubit,
   }) : super(WeatherSymbolsState.initial()) {
     weatherStateSub = weatherCubit.stream.listen(_listenWeatherState);
   }
-
-  final WeatherCubit weatherCubit;
-  late StreamSubscription<WeatherState> weatherStateSub;
 
   void _listenWeatherState(WeatherState weatherState) {
     final degree = weatherState.selected?.degree;

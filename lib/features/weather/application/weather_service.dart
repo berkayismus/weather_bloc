@@ -1,6 +1,3 @@
-import 'package:weather_bloc/weather/data/repositories/weather_repository.dart';
-import 'package:weather_bloc/weather/domain/weather.dart';
-
 // * [repository] den gelen veri, bir takım işlemlerden geçecekse
 // * yani, business logic içeriyorsa
 // * ilgili business logic, [controller] katmanında değil [service] katmanında olmalıdır
@@ -10,6 +7,8 @@ import 'package:weather_bloc/weather/domain/weather.dart';
 // * [service] katmanı opsiyoneldir.
 // * iş mantığı içermeyen durumlarda, kullanılmasına gerek yoktur
 // * direkt olarak [repository] ile etkileşime geçer
+import 'package:weather_bloc/features/weather/data/repositories/weather_repository.dart';
+import 'package:weather_bloc/features/weather/domain/weather.dart';
 
 class WeatherService {
   final IWeatherRepository weatherRepository;
